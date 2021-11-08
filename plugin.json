@@ -1,7 +1,5 @@
 {
     "version": "1.0.0",
     "title": "Moondeer's Conversaton",
-    "description": "Plugin for injecting Conversation.js.",
-    "includes": [],
-    "fields": []
+    "description": "Plugin for injecting Conversation.js."
   }
