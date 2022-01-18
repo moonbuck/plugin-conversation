@@ -1,0 +1,43 @@
+{{/* Resolve the plugin parameter values. */}}
+{{- if not (.Scratch.Get "plugin-conversation.Parameters") -}}
+{{- partial "plugin-conversation/load-parameters.html" . -}}
+{{- end -}}
+
+{{- with .Scratch.Get "plugin-conversation.Parameters" -}}
+
+  {{/* Construct the URL */}}
+  {{- $url := "https://micro.blog/conversation.js" -}}
+  {{- $queries := slice "url" $.Permalink "format" "jsonfeed" -}}
+  {{- $url = printf "%s?%s" $url (querify $queries) -}}
+  
+  {{/* Fetch the conversation items */}}
+  {{- $json_feed := getJSON $url -}}
+  
+  {{/* Ensure there are items to display */}}
+  {{- if $json_feed.items -}}
+  
+<div id="{{ .Style.ItemsWrapperID }}">
+  
+  {{/* Iterate the items */}}
+    {{- range $item := $json_feed.items -}}
+  <div class="{{ .Style.ItemClassName }}">
+    <div class="{{ .Style.AuthorClassName }}">
+      <img src="{{ $item.author.avatar }}" />
+      <span>{{ $item.author.name }}</span>
+    </div>
+    <div class="{{ .Style.ContentClassName }}">
+      {{- $item.content_html | safeHTML -}}
+    </div>
+    <div class="{{ .Style.PublishDateClassName }}">
+      <a href="{{ $item.url }}">
+        {{- time.Format "3:04 PM • Jan 2, 2006" $item.date_published -}}
+      </a>
+    </div>
+  </div>
+    {{- end -}}
+  
+  </div>
+  
+  {{- end -}}
+
+{{- end }}

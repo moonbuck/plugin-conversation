@@ -1,0 +1,73 @@
+# Parameters for styling conversation items
+###########################################
+
+# The class name to assign to the conversation items wrapper.
+#
+ItemsWrapperID = 'conversation-items'
+
+# Sass block to apply to the conversation items wrapper.
+#
+ItemsWrapper = '''
+margin-top: 50px;
+padding-top: 20px;
+border-top: 0.5px solid lightgray;
+'''
+
+# The class name to assign to item wrappers.
+#
+ItemClassName = 'conversation-item'
+
+# Sass block to apply to item wrappers.
+#
+Item = '''
+padding-top: 20px;
+padding-bottom: 20px;
+'''
+
+# The class name to assign to item content wrappers.
+#
+ContentClassName = 'conversation-item-content'
+
+# Sass block to apply to the item content wrapper.
+#
+Content = '''
+p a {
+  text-decoration: none;
+  box-shadow: none;
+}
+'''
+# The class name to assign to item author wrappers.
+#
+AuthorClassName = 'conversation-item-author'
+
+# Sass block to apply to item author wrappers.
+#
+Author = ''
+
+# Sass block to apply to avatars.
+#
+Avatar = '''
+border-radius: 10px;
+vertical-align: middle;
+'''
+
+# Sass block to apply to item author names.
+#
+Name = ''
+
+# The class name to assign to item publish dates.
+#
+PublishDateClassName = 'conversation-item-publish-date'
+
+# Sass block to apply to item publish dates.
+#
+PublishDate = '''
+font-size: 13px;
+padding-top: 10px;
+color: gray;
+
+a {
+  color: gray;
+  text-decoration: none;
+}
+'''
