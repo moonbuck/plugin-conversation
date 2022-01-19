@@ -29,13 +29,15 @@
     <img class="u-photo" src="{{ $item.author.avatar }}" />
     <span class="p-nickname">{{ $item.author.name }}</span>
   </a>
-  <div class="e-content p-name">
-    {{- $item.content_html | safeHTML -}}
-  </div>
+  <p class="e-content p-name">
+    {{- substr $item.content_html 3 -5 | safeHTML -}}
+  </p>
   <a class="u-url" href="{{ $item.url }}">
-    <time class="dt-published">
-      {{- time.Format "3:04 PM • Jan 2, 2006" $item.date_published -}}
-    </time>
+    <small>
+      <time class="dt-published">
+        {{- time.Format "3:04 PM • Jan 2, 2006" $item.date_published -}}
+      </time>
+    </small>
   </a>
 </div>
 

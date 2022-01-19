@@ -24,29 +24,57 @@
 {{ with .Scratch.Get "plugin-conversation.Parameters" }}
 
 #{{ .Style.WrapperID }} {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+  
   {{ with .Style.Wrapper }}{{ template "rfs-wrap" . }}{{ end }}
   
   .u-comment {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    
     {{ with .Style.Item }}{{ template "rfs-wrap" . }}{{ end }}
     
     .u-author {
+      display: flex;
+      align-items: center;
+      gap: 1ch;
+      
       {{ with .Style.Author }}{{ template "rfs-wrap" . }}{{ end }}
       
-      .u-photo {
+      .u-photo {        
         {{ with .Style.Avatar }}{{ template "rfs-wrap" . }}{{ end }}
       }
       
       .p-nickname {
+        
+        @media (min-width: 1024px) {
+         margin-top: -24px; 
+        }
+        
         {{ with .Style.Name }}{{ template "rfs-wrap" . }}{{ end }}
       }
       
     }
     
     .e-content {
+      
+      @media (min-width: 1024px) {
+        &::first-line { padding-left: 78px; }
+        :first-child { padding-left: 78px; }
+        margin-top: -32px;
+      }
+      
       {{ with .Style.Content }}{{ template "rfs-wrap" . }}{{ end }}
     }
     
     .u-url {
+      margin-top: 0;
+      padding-top: 0;
+      
       {{ with .Style.Link }}{{ template "rfs-wrap" . }}{{ end }}
       
       .dt-published {
