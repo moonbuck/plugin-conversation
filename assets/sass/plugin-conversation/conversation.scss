@@ -21,51 +21,62 @@
   
 {{ end }}
 
-{{ with .Scratch.Get "plugin-conversation.Parameters" }}
+{{ with (.Scratch.Get "plugin-conversation.Parameters").Style }}
 
-#{{ .Style.WrapperID }} {
+$avatar_diameter: {{ .Variables.Avatar.Diameter }};
+
+#{{ .WrapperID }} {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   margin-top: 2rem;
   
-  {{ with .Style.Wrapper }}{{ template "rfs-wrap" . }}{{ end }}
+  {{ with .Wrapper }}{{ template "rfs-wrap" . }}{{ end }}
   
   .u-comment {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
     
-    {{ with .Style.Item }}{{ template "rfs-wrap" . }}{{ end }}
+    {{ with .Item }}{{ template "rfs-wrap" . }}{{ end }}
     
     .u-author {
       display: flex;
       align-items: center;
       gap: 1ch;
       
-      {{ with .Style.Author }}{{ template "rfs-wrap" . }}{{ end }}
+      {{ with .Author }}{{ template "rfs-wrap" . }}{{ end }}
       
-      .u-photo {        
-        {{ with .Style.Avatar }}{{ template "rfs-wrap" . }}{{ end }}
+      .u-photo {
+        width: $avatar_diameter;
+        height: $avatar_diameter;
+        {{ if (eq "circle" .Variables.Avatar.Shape) }}      
+        border-radius: $avatar_diameter * .5;
+        {{ end }}
+        box-shadow: {{ .Variables.Avatar.BoxShadow }};
+        
+        {{ with .Avatar }}{{ template "rfs-wrap" . }}{{ end }}
       }
       
       .p-nickname {
         
         @media (min-width: 1024px) {
-         margin-top: -24px; 
+         margin-top: $avatar_diameter * -.375; 
         }
         
-        {{ with .Style.Name }}{{ template "rfs-wrap" . }}{{ end }}
+        {{ with .Name }}{{ template "rfs-wrap" . }}{{ end }}
       }
       
     }
     
     .e-content {
+      padding: 0;
+      margin: 0;
       
       @media (min-width: 1024px) {
         &::first-line { padding-left: 78px; }
         :first-child { padding-left: 78px; }
-        margin-top: -32px;
+        margin-top: $avatar_diameter * -.5;
       }
       
       {{ with .Style.Content }}{{ template "rfs-wrap" . }}{{ end }}
@@ -75,10 +86,10 @@
       margin-top: 0;
       padding-top: 0;
       
-      {{ with .Style.Link }}{{ template "rfs-wrap" . }}{{ end }}
+      {{ with .Link }}{{ template "rfs-wrap" . }}{{ end }}
       
       .dt-published {
-        {{ with .Style.PublishDate }}{{ template "rfs-wrap" . }}{{ end }}
+        {{ with .PublishDate }}{{ template "rfs-wrap" . }}{{ end }}
       }
     }
     
