@@ -23,31 +23,35 @@
 
 {{ with .Scratch.Get "plugin-conversation.Parameters" }}
 
-#{{ .Style.ItemsWrapperID }} {
-  {{ with .Style.ItemsWrapper }}{{ template "rfs-wrap" . }}{{ end }}
+#{{ .Style.WrapperID }} {
+  {{ with .Style.Wrapper }}{{ template "rfs-wrap" . }}{{ end }}
   
-  .{{ .Style.ItemClassName }} {
-    {{ with .Style.ItemsWrapper }}{{ template "rfs-wrap" . }}{{ end }}
+  .u-comment {
+    {{ with .Style.Item }}{{ template "rfs-wrap" . }}{{ end }}
     
-    .{{ .Style.AuthorClassName }} {
+    .u-author {
       {{ with .Style.Author }}{{ template "rfs-wrap" . }}{{ end }}
       
-      img {
+      .u-photo {
         {{ with .Style.Avatar }}{{ template "rfs-wrap" . }}{{ end }}
       }
       
-      span {
+      .p-nickname {
         {{ with .Style.Name }}{{ template "rfs-wrap" . }}{{ end }}
       }
       
     }
     
-    .{{ .Style.ContentClassName }} {
+    .e-content {
       {{ with .Style.Content }}{{ template "rfs-wrap" . }}{{ end }}
     }
     
-    .{{ .Style.PublishDateClassName }} {
-      {{ with .Style.PublishDate }}{{ template "rfs-wrap" . }}{{ end }}
+    .u-url {
+      {{ with .Style.Link }}{{ template "rfs-wrap" . }}{{ end }}
+      
+      .dt-published {
+        {{ with .Style.PublishDate }}{{ template "rfs-wrap" . }}{{ end }}
+      }
     }
     
   }

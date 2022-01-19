@@ -1,43 +1,48 @@
-{{/* Resolve the plugin parameter values. */}}
+<!-- Resolve the plugin parameter values -->
 {{- if not (.Scratch.Get "plugin-conversation.Parameters") -}}
 {{- partial "plugin-conversation/load-parameters.html" . -}}
 {{- end -}}
 
-{{- with .Scratch.Get "plugin-conversation.Parameters" -}}
+{{- $Style := (.Scratch.Get "plugin-conversation.Parameters").Style -}}
+{{- $HiddenItems := (.Scratch.Get "plugin-conversation.Parameters").Filter.HiddenItems -}}
 
-  {{/* Construct the URL */}}
-  {{- $url := "https://micro.blog/conversation.js" -}}
-  {{- $queries := slice "url" $.Permalink "format" "jsonfeed" -}}
-  {{- $url = printf "%s?%s" $url (querify $queries) -}}
+<!-- Construct the URL -->
+{{- $url := "https://micro.blog/conversation.js" -}}
+{{- $queries := slice "url" $.Permalink "format" "jsonfeed" -}}
+{{- $url = printf "%s?%s" $url (querify $queries) -}}
+
+<!-- Fetch the conversation items -->
+{{- $json_feed := getJSON $url -}}
+
+<!-- Ensure there are items to display -->
+{{- if $json_feed.items -}}
+
+<div id="{{ $Style.WrapperID }}">
+
+  <!-- Iterate the items -->
+  {{- range $item := $json_feed.items -}}
   
-  {{/* Fetch the conversation items */}}
-  {{- $json_feed := getJSON $url -}}
-  
-  {{/* Ensure there are items to display */}}
-  {{- if $json_feed.items -}}
-  
-<div id="{{ .Style.ItemsWrapperID }}">
-  
-  {{/* Iterate the items */}}
-    {{- range $item := $json_feed.items -}}
-  <div class="{{ .Style.ItemClassName }}">
-    <div class="{{ .Style.AuthorClassName }}">
-      <img src="{{ $item.author.avatar }}" />
-      <span>{{ $item.author.name }}</span>
-    </div>
-    <div class="{{ .Style.ContentClassName }}">
-      {{- $item.content_html | safeHTML -}}
-    </div>
-    <div class="{{ .Style.PublishDateClassName }}">
-      <a href="{{ $item.url }}">
-        {{- time.Format "3:04 PM • Jan 2, 2006" $item.date_published -}}
-      </a>
-    </div>
+    {{- if not (in $HiddenItems $item.id) -}}
+    
+<div id="{{ $item.id }}" class="u-comment h-cite">
+  <a class="u-author h-card" href="{{ $item.author.url }}">
+    <img class="u-photo" src="{{ $item.author.avatar }}" />
+    <span class="p-nickname">{{ $item.author.name }}</span>
+  </a>
+  <div class="e-content p-name">
+    {{- $item.content_html | safeHTML -}}
   </div>
+  <a class="u-url" href="{{ $item.url }}">
+    <time class="dt-published">
+      {{- time.Format "3:04 PM • Jan 2, 2006" $item.date_published -}}
+    </time>
+  </a>
+</div>
+
     {{- end -}}
   
-  </div>
-  
   {{- end -}}
+
+</div>
 
 {{- end }}
