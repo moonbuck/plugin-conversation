@@ -30,7 +30,11 @@
     <span class="p-nickname">{{ $item.author.name }}</span>
   </a>
   <p class="e-content p-name">
-    {{- substr $item.content_html 3 -5 | safeHTML -}}
+    {{- if (findRE `^<p>.*</p>$` $item.content_html) -}}
+      {{- substr $item.content_html 3 -5 | safeHTML -}}
+    {{- else -}}
+      {{- $item.content_html | safeHTML -}}
+    {{- end -}}
   </p>
   <a class="u-url" href="{{ $item.url }}">
     <small>
