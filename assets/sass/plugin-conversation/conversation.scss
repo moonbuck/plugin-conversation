@@ -61,7 +61,8 @@ $avatar_diameter: {{ .Variables.Avatar.Diameter }};
       .p-nickname {
         
         @media (min-width: 1024px) {
-         margin-top: $avatar_diameter * -.375; 
+         margin-top: $avatar_diameter * -.375;
+         margin-left: $avatar_diameter * 1.1;
         }
         
         {{ with .Name }}{{ template "rfs-wrap" . }}{{ end }}
