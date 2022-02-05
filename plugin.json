@@ -1,6 +1,6 @@
 {
     "version": "3.0.4",
     "title": "Moondeer's Conversaton",
-    "description": "Plugin for injecting Conversation.js.",
+    "description": "Plugin for injecting Conversation.js. A README is on the way. See the documented configuration files in the plugin's data directory for plugin parameters, invoke the partial from your post template and feel free to holler at me with any questions.",
     "includes": [ "plugin-conversation/injection.html" ]
   }
