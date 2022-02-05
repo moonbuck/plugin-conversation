@@ -62,8 +62,7 @@ $avatar_diameter: {{ .Variables.Avatar.Diameter }};
         
         @media (min-width: 1024px) {
          margin-top: $avatar_diameter * -.375;
-         margin-left: $avatar_diameter * 1.1;
-        }
+       }
         
         {{ with .Name }}{{ template "rfs-wrap" . }}{{ end }}
       }
@@ -78,6 +77,7 @@ $avatar_diameter: {{ .Variables.Avatar.Diameter }};
         &::first-line { padding-left: 78px; }
         :first-child { padding-left: 78px; }
         margin-top: $avatar_diameter * -.5;
+        margin-left: $avatar_diameter * 1.1;
       }
       
       {{ with .Style.Content }}{{ template "rfs-wrap" . }}{{ end }}
