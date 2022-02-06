@@ -61,7 +61,7 @@ $avatar_diameter: {{ .Variables.Avatar.Diameter }};
       .p-nickname {
         
         @media (min-width: 1024px) {
-         margin-top: $avatar_diameter * -.375;
+         margin-top: $avatar_diameter * -.5;
        }
         
         {{ with .Name }}{{ template "rfs-wrap" . }}{{ end }}
@@ -74,10 +74,9 @@ $avatar_diameter: {{ .Variables.Avatar.Diameter }};
       margin: 0;
       
       @media (min-width: 1024px) {
-        &::first-line { padding-left: 78px; }
-        :first-child { padding-left: 78px; }
+        &::first-line { padding-left: $avatar_diameter * 1.1; }
+        :first-child { padding-left: $avatar_diameter * 1.1; }
         margin-top: $avatar_diameter * -.5;
-        margin-left: $avatar_diameter * 1.1;
       }
       
       {{ with .Style.Content }}{{ template "rfs-wrap" . }}{{ end }}
