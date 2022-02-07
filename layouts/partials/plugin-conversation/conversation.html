@@ -30,7 +30,7 @@
     <span class="p-nickname">{{ $item.author.name }}</span>
   </a>
   <p class="e-content p-name">
-    {{- replace (replace $item.content_html "<p>" "") "</p>" "" | safeHTML -}}
+  {{- replace (replace $item.content_html "<p>" "") "</p>" "<br />" | strings.TrimSuffix "<br />" | safeHTML -}}
   </p>
   <a class="u-url" href="{{ $item.url }}">
     <small>
