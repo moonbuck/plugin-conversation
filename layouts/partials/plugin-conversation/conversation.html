@@ -30,11 +30,7 @@
     <span class="p-nickname">{{ $item.author.name }}</span>
   </a>
   <p class="e-content p-name">
-  {{- with (findRE `<p>.*</p>` $item.content_html) -}}
-      {{- replaceRE `^\s*<p>(.*)</p>\s*$` "$1" (index . 0) | safeHTML  -}}
-    {{- else -}}
-      {{- $item.content_html | safeHTML -}}
-    {{- end -}}
+    {{- replace (replace $item.content_html "<p>" "") "</p>" "" | safeHTML -}}
   </p>
   <a class="u-url" href="{{ $item.url }}">
     <small>
