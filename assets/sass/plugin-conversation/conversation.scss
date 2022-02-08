@@ -73,13 +73,15 @@ $avatar_diameter: {{ .Variables.Avatar.Diameter }};
       padding: 0;
       margin: 0;
       
+      a.u-mention:empty { display: none;}
+      
       @media (min-width: 1024px) {
         &::first-line { padding-left: $avatar_diameter * 1.1; }
         :first-child { padding-left: $avatar_diameter * 1.1; }
         margin-top: $avatar_diameter * -.5;
       }
       
-      {{ with .Style.Content }}{{ template "rfs-wrap" . }}{{ end }}
+      {{ with .Content }}{{ template "rfs-wrap" . }}{{ end }}
     }
     
     .u-url {
