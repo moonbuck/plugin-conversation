@@ -6,7 +6,7 @@
 {{- with (.Scratch.Get "plugin-conversation.Parameters") -}}
 
   {{- if .Config.DebugPrint -}}
-    {{- printf "\n<!--\nplugin-conversation.Parameters:\n%s\n-->" (jsonify .) | safeHTML -}}
+    {{- printf "\n<!--\nplugin-conversation.Parameters:\n%s\n-->" (. | jsonify (dict "prefix" " " "indent" "  ")) | safeHTML -}}
   {{- end -}}
 
   <!-- Insert the plugin version and build time -->
